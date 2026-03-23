@@ -693,6 +693,128 @@
     }
 
     #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── MEGA WHATSAPP BUTTON ── */
+    .wa-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(37,211,102,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .wa-glow2 {
+      position: absolute;
+      top: 10%; right: -5%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .wa-mega-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: linear-gradient(135deg, #1a3a22 0%, #1e4a28 50%, #25D366 100%);
+      border: 1px solid rgba(37,211,102,0.4);
+      color: #fff;
+      text-decoration: none;
+      padding: 1.8rem 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+      box-shadow: 0 0 40px rgba(37,211,102,0.15), 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .wa-mega-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37,211,102,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .wa-mega-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 80px rgba(37,211,102,0.3), 0 30px 80px rgba(0,0,0,0.5);
+      border-color: rgba(37,211,102,0.7);
+    }
+
+    .wa-mega-btn:hover::before { opacity: 1; }
+
+    .wa-pulse {
+      position: absolute;
+      top: -1px; left: -1px; right: -1px; bottom: -1px;
+      border: 1px solid rgba(37,211,102,0.5);
+      animation: waPulse 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes waPulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0; transform: scale(1.04); }
+    }
+
+    .wa-mega-icon {
+      width: 52px; height: 52px;
+      fill: white;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 12px rgba(37,211,102,0.6));
+    }
+
+    .wa-mega-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+    }
+
+    .wa-mega-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .wa-mega-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.1em;
+    }
+
+    .wa-arrow {
+      font-size: 1.8rem;
+      margin-left: 0.5rem;
+      transition: transform 0.3s;
+      opacity: 0.7;
+    }
+
+    .wa-mega-btn:hover .wa-arrow {
+      transform: translateX(6px);
+      opacity: 1;
+    }
+
+    .wa-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .wa-badge {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.2rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
   </style>
 </head>
 <body>
@@ -913,82 +1035,54 @@
 </section>
 
 <!-- ── CONTACT ── -->
-<section id="contact">
-  <div class="contact-grid">
-    <div class="contact-info reveal">
-      <p class="section-tag">
-        <span data-lang="es" class="active">// Contacto</span>
-        <span data-lang="en">// Contact</span>
-      </p>
-      <h2 class="section-title">
-        <span data-lang="es" class="active">Hablemos de<br/><span style="color:var(--gold2)">tu proyecto</span></span>
-        <span data-lang="en">Let's talk about<br/><span style="color:var(--gold2)">your project</span></span>
-      </h2>
-      <div class="divider"></div>
-      <p>
-        <span data-lang="es" class="active">¿Tienes una idea, un problema o simplemente quieres saber más? Escríbeme directamente por WhatsApp o llena el formulario.</span>
-        <span data-lang="en">Have an idea, a problem, or just want to know more? Message me directly on WhatsApp or fill out the form.</span>
-      </p>
-      <!-- REPLACE +52XXXXXXXXXX with your actual number -->
-      <a href="https://wa.me/526679612041" target="_blank" class="whatsapp-btn">
-        <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.551 4.099 1.512 5.831L.057 23.486a.5.5 0 0 0 .612.612l5.655-1.455A11.947 11.947 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.49-5.156-1.345l-.37-.213-3.818.982.999-3.818-.213-.37A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-        </svg>
-        <span data-lang="es" class="active">Escríbeme por WhatsApp</span>
-        <span data-lang="en">Message me on WhatsApp</span>
-      </a>
-    </div>
+<section id="contact" style="text-align:center; position:relative; overflow:hidden;">
+  <div class="wa-glow"></div>
+  <div class="wa-glow2"></div>
 
-    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
-      <div class="form-row">
-        <div class="form-group">
-          <label>
-            <span data-lang="es" class="active">Nombre</span>
-            <span data-lang="en">Name</span>
-          </label>
-          <input type="text" id="fname" required placeholder="Juan García"/>
-        </div>
-        <div class="form-group">
-          <label>
-            <span data-lang="es" class="active">Correo electrónico</span>
-            <span data-lang="en">Email</span>
-          </label>
-          <input type="email" id="femail" required placeholder="tu@correo.com"/>
-        </div>
-      </div>
+  <p class="section-tag reveal">
+    <span data-lang="es" class="active">// Contacto</span>
+    <span data-lang="en">// Contact</span>
+  </p>
+  <h2 class="section-title reveal" style="margin-bottom:1rem;">
+    <span data-lang="es" class="active">¿Listo para<br/><span style="color:var(--gold2)">empezar?</span></span>
+    <span data-lang="en">Ready to<br/><span style="color:var(--gold2)">get started?</span></span>
+  </h2>
+  <div class="divider reveal" style="margin:0 auto 1.5rem;"></div>
 
-      <div class="form-group">
-        <label>
-          <span data-lang="es" class="active">Servicio de interés</span>
-          <span data-lang="en">Service of interest</span>
-        </label>
-        <select id="fservice">
-          <option value="" disabled selected>
-            <span data-lang="es" class="active">Selecciona una opción</span>
-            <span data-lang="en">Select an option</span>
-          </option>
-          <option class="opt-web" value="web">Diseño Web / Web Design</option>
-          <option class="opt-sw" value="software">Programa personalizado / Custom software</option>
-          <option class="opt-ec" value="ecommerce">Tienda en línea / Online store</option>
-          <option class="opt-maint" value="maint">Mantenimiento / Maintenance</option>
-          <option class="opt-other" value="other">Otro / Other</option>
-        </select>
-      </div>
+  <p class="reveal" style="color:var(--text-muted);max-width:480px;margin:0 auto 3.5rem;line-height:1.8;font-size:1rem;font-weight:400;">
+    <span data-lang="es" class="active">Un solo mensaje es suficiente para arrancar. Sin formularios, sin esperas — respuesta rápida garantizada.</span>
+    <span data-lang="en">One message is all it takes. No forms, no waiting — fast response guaranteed.</span>
+  </p>
 
-      <div class="form-group">
-        <label>
-          <span data-lang="es" class="active">Cuéntame sobre tu proyecto</span>
-          <span data-lang="en">Tell me about your project</span>
-        </label>
-        <textarea id="fmsg" required placeholder="…"></textarea>
-      </div>
+  <a href="https://wa.me/526679612041" target="_blank" class="wa-mega-btn reveal">
+    <span class="wa-pulse"></span>
+    <svg class="wa-mega-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.551 4.099 1.512 5.831L.057 23.486a.5.5 0 0 0 .612.612l5.655-1.455A11.947 11.947 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.49-5.156-1.345l-.37-.213-3.818.982.999-3.818-.213-.37A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+    <span class="wa-mega-text">
+      <span class="wa-mega-label">
+        <span data-lang="es" class="active">Escríbeme ahora</span>
+        <span data-lang="en">Message me now</span>
+      </span>
+      <span class="wa-mega-sub">WhatsApp · +52 667 961 2041</span>
+    </span>
+    <span class="wa-arrow">→</span>
+  </a>
 
-      <button type="submit" class="btn-primary" style="align-self:flex-start;border:none;cursor:pointer;">
-        <span data-lang="es" class="active">Enviar mensaje</span>
-        <span data-lang="en">Send message</span>
-      </button>
-    </form>
+  <div class="wa-badges reveal">
+    <span class="wa-badge">
+      <span data-lang="es" class="active">⚡ Respuesta en minutos</span>
+      <span data-lang="en">⚡ Reply in minutes</span>
+    </span>
+    <span class="wa-badge">
+      <span data-lang="es" class="active">🔒 Sin compromisos</span>
+      <span data-lang="en">🔒 No commitment</span>
+    </span>
+    <span class="wa-badge">
+      <span data-lang="es" class="active">🌎 ES / EN</span>
+      <span data-lang="en">🌎 ES / EN</span>
+    </span>
   </div>
 </section>
 
