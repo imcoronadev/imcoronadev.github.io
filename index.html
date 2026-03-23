@@ -1042,9 +1042,26 @@
   /* ── FORM ── */
   function handleSubmit(e) {
     e.preventDefault();
+    const name    = document.getElementById('fname').value.trim();
+    const email   = document.getElementById('femail').value.trim();
+    const service = document.getElementById('fservice').value;
+    const msg     = document.getElementById('fmsg').value.trim();
+
+    const serviceLabel = {
+      web:      'Diseño Web / Web Design',
+      software: 'Programa personalizado / Custom software',
+      ecommerce:'Tienda en línea / Online store',
+      maint:    'Mantenimiento / Maintenance',
+      other:    'Otro / Other'
+    }[service] || service;
+
+    const text = `👋 Hola, soy *${name}* (${email})\n\n🛠 Servicio: ${serviceLabel}\n\n📝 ${msg}`;
+    const encoded = encodeURIComponent(text);
+    window.open(`https://wa.me/526679612041?text=${encoded}`, '_blank');
+
     showToast(currentLang === 'es'
-      ? '✓ Mensaje enviado — te contactaré pronto!'
-      : '✓ Message sent — I\'ll reach out soon!');
+      ? '✓ Abriendo WhatsApp...'
+      : '✓ Opening WhatsApp...');
     e.target.reset();
   }
 
