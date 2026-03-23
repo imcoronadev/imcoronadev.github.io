@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Corona Dev</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Syne:wght@400;600;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #181818;
+      --gold: #c9a84c;
+      --gold2: #e8c96a;
+      --gold-dim: rgba(201,168,76,0.12);
+      --text: #f0ead6;
+      --text-muted: #8a8070;
+      --border: rgba(201,168,76,0.2);
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      color: var(--gold2);
+    }
+
+    .logo span {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold2); }
+
+    /* Language Toggle */
+    .lang-toggle {
+      display: flex;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .lang-btn {
+      padding: 0.3rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Syne', sans-serif;
+    }
+
+    .lang-btn.active {
+      background: var(--gold);
+      color: #0a0a0a;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-glow2 {
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero h1 .gold { color: var(--gold2); }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.7;
+      font-weight: 400;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn-primary {
+      padding: 0.9rem 2.5rem;
+      background: var(--gold);
+      color: #0a0a0a;
+      border: none;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+
+    .btn-primary:hover {
+      background: var(--gold2);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(201,168,76,0.3);
+    }
+
+    .btn-secondary {
+      padding: 0.9rem 2.5rem;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+
+    .btn-secondary:hover {
+      background: var(--gold-dim);
+      transform: translateY(-2px);
+    }
+
+    /* Crown decoration */
+    .crown-deco {
+      position: absolute;
+      right: 5%;
+      bottom: 15%;
+      font-size: 12rem;
+      opacity: 0.04;
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 7rem 5%;
+    }
+
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      line-height: 1.9;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p strong {
+      color: var(--gold2);
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 1.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--gold);
+    }
+
+    .stat-card:hover { border-color: var(--gold); }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--gold2);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-top: 0.4rem;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--bg);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+      cursor: default;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.4s;
+    }
+
+    .service-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      background: var(--bg3);
+    }
+
+    .service-card:hover::after { width: 100%; }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    /* ── PRICING ── */
+    #pricing {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .pricing-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--bg3);
+      border: 1px solid var(--gold);
+      padding: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .pricing-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(201,168,76,0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .pricing-badge {
+      display: inline-block;
+      background: var(--gold-dim);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 900;
+      color: var(--gold2);
+      margin-bottom: 1rem;
+    }
+
+    .pricing-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .pricing-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .pricing-feature::before {
+      content: '◆';
+      color: var(--gold);
+      font-size: 0.5rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+
+    .whatsapp-btn:hover {
+      background: #1db954;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(37,211,102,0.3);
+    }
+
+    .whatsapp-icon {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    /* Form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.9rem 1.2rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.3s;
+      resize: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group select option {
+      background: var(--bg2);
+      color: var(--text);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { min-height: 130px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 5%;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--gold2);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── SCROLL LINE ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      z-index: 200;
+      transition: width 0.1s;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%       { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .crown-deco { font-size: 6rem; }
+      .pricing-box { padding: 2.5rem 1.5rem; }
+    }
+
+    /* ── LANGUAGE HIDDEN ── */
+    [data-lang] { display: none; }
+    [data-lang].active { display: block; }
+    span[data-lang].active { display: inline; }
+
+    /* notification toast */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg3);
+      border: 1px solid var(--gold);
+      color: var(--text);
+      padding: 1rem 1.8rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 300;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+
+    #toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Toast notification -->
+<div id="toast"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="logo">Corona<span>.dev</span></div>
+  <ul class="nav-links">
+    <li><a href="#about" class="nav-link" data-es="Sobre mí" data-en="About">Sobre mí</a></li>
+    <li><a href="#services" class="nav-link" data-es="Servicios" data-en="Services">Servicios</a></li>
+    <li><a href="#pricing" class="nav-link" data-es="Precios" data-en="Pricing">Precios</a></li>
+    <li><a href="#contact" class="nav-link" data-es="Contacto" data-en="Contact">Contacto</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btnES" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="crown-deco">👑</div>
+
+  <p class="hero-tag">
+    <span data-lang="es" class="active">Desarrollo &amp; Diseño Digital</span>
+    <span data-lang="en">Development &amp; Digital Design</span>
+  </p>
+
+  <h1>
+    <span data-lang="es" class="active">Tu visión,<br/><span class="gold">código real.</span></span>
+    <span data-lang="en">Your vision,<br/><span class="gold">real code.</span></span>
+  </h1>
+
+  <p class="hero-sub">
+    <span data-lang="es" class="active">Soluciones digitales a medida — desde páginas web hasta programas personalizados. Calidad que se nota.</span>
+    <span data-lang="en">Custom digital solutions — from websites to tailored software. Quality you can feel.</span>
+  </p>
+
+  <div class="hero-cta">
+    <a href="#contact" class="btn-primary" id="heroCta1">
+      <span data-lang="es" class="active">Solicitar cotización</span>
+      <span data-lang="en">Get a quote</span>
+    </a>
+    <a href="#services" class="btn-secondary" id="heroCta2">
+      <span data-lang="es" class="active">Ver servicios</span>
+      <span data-lang="en">See services</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p class="section-tag">
+        <span data-lang="es" class="active">// Sobre mí</span>
+        <span data-lang="en">// About me</span>
+      </p>
+      <h2 class="section-title">
+        <span data-lang="es" class="active">Detrás del<br/><span style="color:var(--gold2)">código</span></span>
+        <span data-lang="en">Behind the<br/><span style="color:var(--gold2)">code</span></span>
+      </h2>
+      <div class="divider"></div>
+      <p>
+        <span data-lang="es" class="active">Soy un desarrollador apasionado con enfoque en <strong>resultados reales</strong>. Creo que cada proyecto merece atención personalizada, desde la primera línea de código hasta el lanzamiento final.</span>
+        <span data-lang="en">I'm a passionate developer focused on <strong>real results</strong>. I believe every project deserves personalized attention, from the first line of code to the final launch.</span>
+      </p>
+      <p>
+        <span data-lang="es" class="active">Trabajo con <strong>clientes de todos los tamaños</strong> — desde emprendedores hasta negocios consolidados — para construir soluciones que funcionan de verdad.</span>
+        <span data-lang="en">I work with <strong>clients of all sizes</strong> — from entrepreneurs to established businesses — to build solutions that actually work.</span>
+      </p>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label" data-es="Código a medida" data-en="Custom code">Código a medida</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label" data-es="Idiomas" data-en="Languages">Idiomas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">∞</div>
+        <div class="stat-label" data-es="Soporte post-entrega" data-en="Post-delivery support">Soporte post-entrega</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">01</div>
+        <div class="stat-label" data-es="Objetivo: tu éxito" data-en="Goal: your success">Objetivo: tu éxito</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <p class="section-tag reveal">
+    <span data-lang="es" class="active">// Servicios</span>
+    <span data-lang="en">// Services</span>
+  </p>
+  <h2 class="section-title reveal">
+    <span data-lang="es" class="active">¿Qué puedo<br/><span style="color:var(--gold2)">hacer por ti?</span></span>
+    <span data-lang="en">What can I<br/><span style="color:var(--gold2)">do for you?</span></span>
+  </h2>
+  <div class="divider reveal"></div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🌐</div>
+      <div class="service-title">
+        <span data-lang="es" class="active">Diseño Web (Wix / WordPress)</span>
+        <span data-lang="en">Web Design (Wix / WordPress)</span>
+      </div>
+      <p class="service-desc">
+        <span data-lang="es" class="active">Páginas atractivas, rápidas y optimizadas para SEO. Diseño profesional sin complicaciones técnicas para ti.</span>
+        <span data-lang="en">Attractive, fast, SEO-optimized websites. Professional design without technical headaches for you.</span>
+      </p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">⚙️</div>
+      <div class="service-title">
+        <span data-lang="es" class="active">Programas Personalizados</span>
+        <span data-lang="en">Custom Software</span>
+      </div>
+      <p class="service-desc">
+        <span data-lang="es" class="active">Automatizaciones, herramientas internas, scripts y aplicaciones creadas específicamente para tu flujo de trabajo.</span>
+        <span data-lang="en">Automations, internal tools, scripts and apps built specifically for your workflow.</span>
+      </p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">🛒</div>
+      <div class="service-title">
+        <span data-lang="es" class="active">Tiendas en Línea</span>
+        <span data-lang="en">Online Stores</span>
+      </div>
+      <p class="service-desc">
+        <span data-lang="es" class="active">Configuro y personalizo tu e-commerce para que vendas más y tus clientes tengan la mejor experiencia posible.</span>
+        <span data-lang="en">I set up and customize your e-commerce so you sell more and your customers have the best possible experience.</span>
+      </p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">🔧</div>
+      <div class="service-title">
+        <span data-lang="es" class="active">Mantenimiento & Soporte</span>
+        <span data-lang="en">Maintenance & Support</span>
+      </div>
+      <p class="service-desc">
+        <span data-lang="es" class="active">Actualizaciones, corrección de errores y mejoras continuas para que tu proyecto siempre funcione perfectamente.</span>
+        <span data-lang="en">Updates, bug fixes and continuous improvements so your project always runs perfectly.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <p class="section-tag reveal" style="text-align:center">
+    <span data-lang="es" class="active">// Precios</span>
+    <span data-lang="en">// Pricing</span>
+  </p>
+  <h2 class="section-title reveal" style="text-align:center">
+    <span data-lang="es" class="active">Inversión <span style="color:var(--gold2)">personalizada</span></span>
+    <span data-lang="en"><span style="color:var(--gold2)">Personalized</span> investment</span>
+  </h2>
+  <div class="divider reveal" style="margin:0 auto 3rem"></div>
+
+  <div class="pricing-box reveal">
+    <div class="pricing-glow"></div>
+    <div class="pricing-badge">
+      <span data-lang="es" class="active">Cotización sin costo</span>
+      <span data-lang="en">Free quote</span>
+    </div>
+    <h3 class="pricing-title">
+      <span data-lang="es" class="active">Cada proyecto es único</span>
+      <span data-lang="en">Every project is unique</span>
+    </h3>
+    <p class="pricing-desc">
+      <span data-lang="es" class="active">No creo en precios genéricos. Me adapto a tus necesidades, tu presupuesto y tus tiempos. Contáctame y te doy una cotización clara y sin compromisos.</span>
+      <span data-lang="en">I don't believe in generic pricing. I adapt to your needs, your budget and your timeline. Contact me and I'll give you a clear, no-obligation quote.</span>
+    </p>
+    <div class="pricing-features">
+      <span class="pricing-feature">
+        <span data-lang="es" class="active">Consulta inicial gratis</span>
+        <span data-lang="en">Free initial consultation</span>
+      </span>
+      <span class="pricing-feature">
+        <span data-lang="es" class="active">Entrega a tiempo</span>
+        <span data-lang="en">On-time delivery</span>
+      </span>
+      <span class="pricing-feature">
+        <span data-lang="es" class="active">Revisiones incluidas</span>
+        <span data-lang="en">Revisions included</span>
+      </span>
+      <span class="pricing-feature">
+        <span data-lang="es" class="active">Soporte post-entrega</span>
+        <span data-lang="en">Post-delivery support</span>
+      </span>
+      <span class="pricing-feature">
+        <span data-lang="es" class="active">Pago flexible</span>
+        <span data-lang="en">Flexible payment</span>
+      </span>
+    </div>
+    <a href="#contact" class="btn-primary">
+      <span data-lang="es" class="active">Solicitar cotización gratis</span>
+      <span data-lang="en">Request a free quote</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <p class="section-tag">
+        <span data-lang="es" class="active">// Contacto</span>
+        <span data-lang="en">// Contact</span>
+      </p>
+      <h2 class="section-title">
+        <span data-lang="es" class="active">Hablemos de<br/><span style="color:var(--gold2)">tu proyecto</span></span>
+        <span data-lang="en">Let's talk about<br/><span style="color:var(--gold2)">your project</span></span>
+      </h2>
+      <div class="divider"></div>
+      <p>
+        <span data-lang="es" class="active">¿Tienes una idea, un problema o simplemente quieres saber más? Escríbeme directamente por WhatsApp o llena el formulario.</span>
+        <span data-lang="en">Have an idea, a problem, or just want to know more? Message me directly on WhatsApp or fill out the form.</span>
+      </p>
+      <!-- REPLACE +52XXXXXXXXXX with your actual number -->
+      <a href="https://wa.me/526679612041" target="_blank" class="whatsapp-btn">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.551 4.099 1.512 5.831L.057 23.486a.5.5 0 0 0 .612.612l5.655-1.455A11.947 11.947 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.49-5.156-1.345l-.37-.213-3.818.982.999-3.818-.213-.37A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+        <span data-lang="es" class="active">Escríbeme por WhatsApp</span>
+        <span data-lang="en">Message me on WhatsApp</span>
+      </a>
+    </div>
+
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>
+            <span data-lang="es" class="active">Nombre</span>
+            <span data-lang="en">Name</span>
+          </label>
+          <input type="text" id="fname" required placeholder="Juan García"/>
+        </div>
+        <div class="form-group">
+          <label>
+            <span data-lang="es" class="active">Correo electrónico</span>
+            <span data-lang="en">Email</span>
+          </label>
+          <input type="email" id="femail" required placeholder="tu@correo.com"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <span data-lang="es" class="active">Servicio de interés</span>
+          <span data-lang="en">Service of interest</span>
+        </label>
+        <select id="fservice">
+          <option value="" disabled selected>
+            <span data-lang="es" class="active">Selecciona una opción</span>
+            <span data-lang="en">Select an option</span>
+          </option>
+          <option class="opt-web" value="web">Diseño Web / Web Design</option>
+          <option class="opt-sw" value="software">Programa personalizado / Custom software</option>
+          <option class="opt-ec" value="ecommerce">Tienda en línea / Online store</option>
+          <option class="opt-maint" value="maint">Mantenimiento / Maintenance</option>
+          <option class="opt-other" value="other">Otro / Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <span data-lang="es" class="active">Cuéntame sobre tu proyecto</span>
+          <span data-lang="en">Tell me about your project</span>
+        </label>
+        <textarea id="fmsg" required placeholder="…"></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary" style="align-self:flex-start;border:none;cursor:pointer;">
+        <span data-lang="es" class="active">Enviar mensaje</span>
+        <span data-lang="en">Send message</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Corona<span style="color:var(--text-muted);font-weight:400">.dev</span></div>
+  <p class="footer-copy">
+    <span data-lang="es" class="active">© 2025 Corona Dev — Todos los derechos reservados</span>
+    <span data-lang="en">© 2025 Corona Dev — All rights reserved</span>
+  </p>
+</footer>
+
+<script>
+  /* ── LANGUAGE ── */
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('active', el.dataset.lang === lang);
+    });
+    document.querySelectorAll('.nav-link').forEach(el => {
+      el.textContent = lang === 'es' ? el.dataset.es : el.dataset.en;
+    });
+    document.querySelectorAll('.stat-label[data-es]').forEach(el => {
+      el.textContent = lang === 'es' ? el.dataset.es : el.dataset.en;
+    });
+    document.getElementById('btnES').classList.toggle('active', lang === 'es');
+    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+  }
+
+  /* ── SCROLL PROGRESS ── */
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('scrollProgress').style.width = scrolled + '%';
+  });
+
+  /* ── REVEAL ON SCROLL ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── FORM ── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    showToast(currentLang === 'es'
+      ? '✓ Mensaje enviado — te contactaré pronto!'
+      : '✓ Message sent — I\'ll reach out soon!');
+    e.target.reset();
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+</script>
+</body>
+</html>
