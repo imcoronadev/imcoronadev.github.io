@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Corona Dev</title>
+  <title>Corona Dev | Expert Landing Pages</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Syne:wght@400;600;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -17,6 +17,7 @@
       --text-muted: #8a8070;
       --border: rgba(201,168,76,0.2);
       --white: #ffffff;
+      --fiverr: #1dbf73;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -181,22 +182,6 @@
       transform: translateY(-2px);
       box-shadow: 0 10px 30px rgba(201,168,76,0.3);
     }
-    .btn-secondary {
-      padding: 0.9rem 2.5rem;
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid var(--gold);
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    }
-    .btn-secondary:hover { background: var(--gold-dim); transform: translateY(-2px); }
 
     .crown-deco {
       position: absolute; right: 5%; bottom: 15%;
@@ -232,7 +217,6 @@
     #about {
       background: var(--bg2);
       border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
     }
     .about-grid {
       display: grid;
@@ -247,924 +231,145 @@
       font-weight: 400;
       margin-bottom: 1.5rem;
     }
-    .about-text p strong { color: var(--gold2); font-weight: 600; }
 
-    /* Tech stack */
-    .tech-stack {
-      margin-top: 2rem;
-    }
-    .tech-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .tech-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-    .tech-pill {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      padding: 0.35rem 0.9rem;
-      letter-spacing: 0.05em;
-      transition: all 0.3s;
-    }
-    .tech-pill:hover { border-color: var(--gold); color: var(--gold); }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    .stat-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      padding: 1.8rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s;
-    }
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: var(--gold);
-    }
-    .stat-card:hover { border-color: var(--gold); }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: var(--gold2);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-top: 0.4rem;
-    }
-
-    /* SERVICES */
-    #services { background: var(--bg); }
-    .services-grid {
+    /* PRICING */
+    #pricing { background: var(--bg); border-top: 1px solid var(--border); }
+    .pricing-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin-top: 3rem;
     }
-    .service-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s;
-      cursor: default;
-    }
-    .service-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 2px;
-      background: var(--gold);
-      transition: width 0.4s;
-    }
-    .service-card:hover { border-color: var(--gold); transform: translateY(-4px); background: var(--bg3); }
-    .service-card:hover::after { width: 100%; }
-    .service-icon { font-size: 2rem; margin-bottom: 1.5rem; }
-    .service-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      color: var(--text);
-    }
-    .service-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; font-weight: 400; }
-
-    /* ── PORTFOLIO ── */
-    #portfolio {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .portfolio-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      position: relative;
-      transition: all 0.4s;
-      cursor: default;
-    }
-    .portfolio-card:hover { border-color: var(--gold); transform: translateY(-6px); }
-    .portfolio-card:hover .portfolio-overlay { opacity: 1; }
-    .portfolio-preview {
-      height: 180px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .portfolio-preview::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 50%, var(--bg) 100%);
-    }
-    .p-rest  { background: linear-gradient(135deg, #1a0800, #2a1000); }
-    .p-ropa  { background: linear-gradient(135deg, #0d0d1a, #1a0a2e); }
-    .p-bode  { background: linear-gradient(135deg, #0a0f0a, #0f1a0f); }
-    .p-anim  { background: linear-gradient(135deg, #1a0010, #2a0020); }
-
-    .portfolio-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(201,168,76,0.06);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .portfolio-info { padding: 1.5rem; }
-    .portfolio-type {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .portfolio-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      color: var(--text);
-    }
-    .portfolio-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-    .portfolio-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .portfolio-tag {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      padding: 0.2rem 0.7rem;
-      letter-spacing: 0.05em;
-    }
-    .portfolio-note {
-      margin-top: 3rem;
-      text-align: center;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-    }
-    .portfolio-note span { color: var(--gold); }
-
-    /* PRICING */
-    #pricing {
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-      margin-top: 3rem;
-      margin-bottom: 2rem;
-    }
     .price-card {
       background: var(--bg2);
       border: 1px solid var(--border);
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 2rem;
       position: relative;
-      overflow: hidden;
       transition: all 0.4s;
     }
-    .price-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.4s;
-    }
-    .price-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-    .price-card:hover::before { transform: scaleX(1); }
     .price-card.featured {
       border-color: var(--gold);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      transform: translateY(-10px);
       background: var(--bg3);
     }
-    .price-card.featured::before { transform: scaleX(1); }
     .price-badge {
       display: inline-block;
-      background: var(--gold);
-      color: #0a0a0a;
+      background: var(--fiverr);
+      color: white;
       font-size: 0.65rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.8rem;
+      padding: 0.3rem 0.8rem;
       margin-bottom: 1rem;
-      font-family: 'DM Mono', monospace;
-    }
-    .price-icon { font-size: 1.8rem; margin-bottom: 1rem; }
-    .price-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-    .price-from {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 0.2rem;
     }
     .price-amount {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: 900;
       color: var(--gold2);
-      line-height: 1;
-      margin-bottom: 0.3rem;
+      margin: 1rem 0;
     }
-    .price-period {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 1.2rem;
-    }
-    .price-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    .price-features li {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .price-features li::before {
-      content: '◆';
-      color: var(--gold);
-      font-size: 0.4rem;
-      flex-shrink: 0;
-    }
-    .pricing-cta {
-      text-align: center;
-      margin-top: 2.5rem;
-    }
-    .pricing-note {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 1rem;
-      letter-spacing: 0.05em;
-    }
+    .price-features { list-style: none; margin: 1.5rem 0; }
+    .price-features li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .price-features li::before { content: '◆ '; color: var(--gold); }
 
-    /* CONTACT */
-    #contact { background: var(--bg2); border-top: 1px solid var(--border); text-align: center; position: relative; overflow: hidden; }
-    .wa-glow {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(37,211,102,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .wa-glow2 {
-      position: absolute; top: 10%; right: -5%;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .wa-mega-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 1.5rem;
-      background: linear-gradient(135deg, #1a3a22 0%, #1e4a28 50%, #25D366 100%);
-      border: 1px solid rgba(37,211,102,0.4);
-      color: #fff;
-      text-decoration: none;
-      padding: 1.8rem 3rem;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s;
-      box-shadow: 0 0 40px rgba(37,211,102,0.15), 0 20px 60px rgba(0,0,0,0.4);
-    }
-    .wa-mega-btn::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(37,211,102,0.1), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .wa-mega-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 80px rgba(37,211,102,0.3), 0 30px 80px rgba(0,0,0,0.5); border-color: rgba(37,211,102,0.7); }
-    .wa-mega-btn:hover::before { opacity: 1; }
-    .wa-pulse {
-      position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px;
-      border: 1px solid rgba(37,211,102,0.5);
-      animation: waPulse 2.5s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes waPulse {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 0; transform: scale(1.04); }
-    }
-    .wa-mega-icon { width: 52px; height: 52px; fill: white; flex-shrink: 0; filter: drop-shadow(0 0 12px rgba(37,211,102,0.6)); }
-    .wa-mega-text { display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; }
-    .wa-mega-label { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; line-height: 1; letter-spacing: -0.01em; }
-    .wa-mega-sub { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; }
-    .wa-arrow { font-size: 1.8rem; margin-left: 0.5rem; transition: transform 0.3s; opacity: 0.7; }
-    .wa-mega-btn:hover .wa-arrow { transform: translateX(6px); opacity: 1; }
-    .wa-badges { display: flex; justify-content: center; gap: 1.2rem; margin-top: 2.5rem; flex-wrap: wrap; }
-    .wa-badge { background: var(--bg2); border: 1px solid var(--border); padding: 0.5rem 1.2rem; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.05em; }
-
-    /* FOOTER */
-    footer {
-      padding: 2.5rem 5%;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
+    /* AD BANNER */
+    .fiverr-ad {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: var(--bg3);
+      border: 1px solid var(--fiverr);
+      padding: 1rem;
+      z-index: 1000;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
       gap: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: slideIn 0.5s ease-out;
     }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; color: var(--gold2); }
-    .footer-copy { font-size: 0.8rem; color: var(--text-muted); font-family: 'DM Mono', monospace; }
-
-    .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold2)); z-index: 200; transition: width 0.1s; }
+    .fiverr-ad p { font-size: 0.75rem; color: var(--text); font-weight: 600; max-width: 150px; }
+    .fiverr-ad a {
+      background: var(--fiverr);
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
-
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    #toast {
-      position: fixed; bottom: 2rem; right: 2rem;
-      background: var(--bg3); border: 1px solid var(--gold);
-      color: var(--text); padding: 1rem 1.8rem;
-      font-size: 0.85rem; font-weight: 600;
-      z-index: 300; transform: translateY(100px); opacity: 0;
-      transition: all 0.4s;
-      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    }
-    #toast.show { transform: translateY(0); opacity: 1; }
-
-    [data-lang] { display: none; }
-    [data-lang].active { display: block; }
-    span[data-lang].active { display: inline; }
+    @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
     @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .form-row { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .crown-deco { font-size: 6rem; }
-      .pricing-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 480px) {
-      .pricing-grid { grid-template-columns: 1fr; }
-      .portfolio-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .fiverr-ad { bottom: 1rem; left: 1rem; right: 1rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="scroll-progress" id="scrollProgress"></div>
-<div id="toast"></div>
-
-<!-- NAV -->
 <nav>
   <div class="logo">Corona<span>.dev</span></div>
   <ul class="nav-links">
-    <li><a href="#about" class="nav-link" data-es="Sobre mí" data-en="About">Sobre mí</a></li>
-    <li><a href="#services" class="nav-link" data-es="Servicios" data-en="Services">Servicios</a></li>
-    <li><a href="#portfolio" class="nav-link" data-es="Portafolio" data-en="Portfolio">Portafolio</a></li>
-    <li><a href="#pricing" class="nav-link" data-es="Precios" data-en="Pricing">Precios</a></li>
-    <li><a href="#contact" class="nav-link" data-es="Contacto" data-en="Contact">Contacto</a></li>
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#pricing">Precios</a></li>
+    <li><a href="#contact">Contacto</a></li>
   </ul>
-  <div class="lang-toggle">
-    <button class="lang-btn active" id="btnES" onclick="setLang('es')">ES</button>
-    <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
-  </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
   <div class="crown-deco">👑</div>
-
-  <p class="hero-tag">
-    <span data-lang="es" class="active">Desarrollo &amp; Diseño Digital</span>
-    <span data-lang="en">Development &amp; Digital Design</span>
-  </p>
-  <h1>
-    <span data-lang="es" class="active">Tu visión,<br/><span class="gold">código real.</span></span>
-    <span data-lang="en">Your vision,<br/><span class="gold">real code.</span></span>
-  </h1>
-  <p class="hero-sub">
-    <span data-lang="es" class="active">Soluciones digitales a medida — desde páginas web hasta tiendas en línea. Calidad que se nota.</span>
-    <span data-lang="en">Custom digital solutions — from websites to online stores. Quality you can feel.</span>
-  </p>
+  <p class="hero-tag">Desarrollo & Diseño Digital</p>
+  <h1>Tu visión,<br/><span class="gold">código real.</span></h1>
+  <p class="hero-sub">Soluciones digitales a medida. Especialista en Landing Pages de alta conversión.</p>
   <div class="hero-cta">
-    <a href="#contact" class="btn-primary">
-      <span data-lang="es" class="active">Solicitar cotización</span>
-      <span data-lang="en">Get a quote</span>
-    </a>
-    <a href="#portfolio" class="btn-secondary">
-      <span data-lang="es" class="active">Ver portafolio</span>
-      <span data-lang="en">See portfolio</span>
-    </a>
+    <a href="https://es.fiverr.com/s/VYl130Y" target="_blank" class="btn-primary">Contratar en Fiverr</a>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p class="section-tag">
-        <span data-lang="es" class="active">// Sobre mí</span>
-        <span data-lang="en">// About me</span>
-      </p>
-      <h2 class="section-title">
-        <span data-lang="es" class="active">Detrás del<br/><span style="color:var(--gold2)">código</span></span>
-        <span data-lang="en">Behind the<br/><span style="color:var(--gold2)">code</span></span>
-      </h2>
-      <div class="divider"></div>
-      <p>
-        <span data-lang="es" class="active">Soy un desarrollador apasionado con enfoque en <strong>resultados reales</strong>. Creo que cada proyecto merece atención personalizada, desde la primera línea de código hasta el lanzamiento final.</span>
-        <span data-lang="en">I'm a passionate developer focused on <strong>real results</strong>. I believe every project deserves personalized attention, from the first line of code to the final launch.</span>
-      </p>
-      <p>
-        <span data-lang="es" class="active">Trabajo con <strong>negocios locales y emprendedores</strong> para construir su presencia digital desde cero — rápido, sin complicaciones y con soporte incluido.</span>
-        <span data-lang="en">I work with <strong>local businesses and entrepreneurs</strong> to build their digital presence from scratch — fast, hassle-free, and with support included.</span>
-      </p>
-      <div class="tech-stack">
-        <p class="tech-label">
-          <span data-lang="es" class="active">// Stack &amp; herramientas</span>
-          <span data-lang="en">// Stack &amp; tools</span>
-        </p>
-        <div class="tech-pills">
-          <span class="tech-pill">HTML / CSS</span>
-          <span class="tech-pill">JavaScript</span>
-          <span class="tech-pill">WordPress</span>
-          <span class="tech-pill">Wix</span>
-          <span class="tech-pill">Shopify</span>
-          <span class="tech-pill">GitHub Pages</span>
-          <span class="tech-pill">Figma</span>
-          <span class="tech-pill">WhatsApp API</span>
-        </div>
-      </div>
-    </div>
-    <div class="stats-grid reveal">
-      <div class="stat-card">
-        <div class="stat-num">100%</div>
-        <div class="stat-label" data-es="Código a medida" data-en="Custom code">Código a medida</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">2</div>
-        <div class="stat-label" data-es="Idiomas" data-en="Languages">Idiomas</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">∞</div>
-        <div class="stat-label" data-es="Soporte post-entrega" data-en="Post-delivery support">Soporte post-entrega</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">24h</div>
-        <div class="stat-label" data-es="Tiempo de respuesta" data-en="Response time">Tiempo de respuesta</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <p class="section-tag reveal">
-    <span data-lang="es" class="active">// Servicios</span>
-    <span data-lang="en">// Services</span>
-  </p>
-  <h2 class="section-title reveal">
-    <span data-lang="es" class="active">¿Qué puedo<br/><span style="color:var(--gold2)">hacer por ti?</span></span>
-    <span data-lang="en">What can I<br/><span style="color:var(--gold2)">do for you?</span></span>
-  </h2>
-  <div class="divider reveal"></div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-icon">🌐</div>
-      <div class="service-title">
-        <span data-lang="es" class="active">Páginas Web</span>
-        <span data-lang="en">Websites</span>
-      </div>
-      <p class="service-desc">
-        <span data-lang="es" class="active">Sitios atractivos, rápidos y optimizados para SEO. Diseño profesional adaptado a tu negocio y tu identidad.</span>
-        <span data-lang="en">Attractive, fast, SEO-optimized websites. Professional design tailored to your business and identity.</span>
-      </p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">🛒</div>
-      <div class="service-title">
-        <span data-lang="es" class="active">Tiendas en Línea</span>
-        <span data-lang="en">Online Stores</span>
-      </div>
-      <p class="service-desc">
-        <span data-lang="es" class="active">E-commerce completo con catálogo, carrito, pagos integrados y botón de WhatsApp para cerrar ventas más rápido.</span>
-        <span data-lang="en">Full e-commerce with catalog, cart, integrated payments and WhatsApp button to close sales faster.</span>
-      </p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">📄</div>
-      <div class="service-title">
-        <span data-lang="es" class="active">Landing Pages</span>
-        <span data-lang="en">Landing Pages</span>
-      </div>
-      <p class="service-desc">
-        <span data-lang="es" class="active">Páginas de aterrizaje diseñadas para convertir visitas en clientes. Perfectas para promociones, servicios o campañas.</span>
-        <span data-lang="en">Landing pages designed to convert visits into customers. Perfect for promotions, services or campaigns.</span>
-      </p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">🔧</div>
-      <div class="service-title">
-        <span data-lang="es" class="active">Mantenimiento & Soporte</span>
-        <span data-lang="en">Maintenance & Support</span>
-      </div>
-      <p class="service-desc">
-        <span data-lang="es" class="active">Actualizaciones, corrección de errores y mejoras continuas para que tu sitio siempre funcione perfectamente.</span>
-        <span data-lang="en">Updates, bug fixes and continuous improvements so your site always runs perfectly.</span>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <p class="section-tag reveal">
-    <span data-lang="es" class="active">// Portafolio</span>
-    <span data-lang="en">// Portfolio</span>
-  </p>
-  <h2 class="section-title reveal">
-    <span data-lang="es" class="active">Proyectos<br/><span style="color:var(--gold2)">recientes</span></span>
-    <span data-lang="en">Recent<br/><span style="color:var(--gold2)">projects</span></span>
-  </h2>
-  <div class="divider reveal"></div>
-
-  <div class="portfolio-grid">
-
-    <div class="portfolio-card reveal">
-      <div class="portfolio-preview p-rest">
-        <div class="portfolio-overlay"></div>
-        🍕
-      </div>
-      <div class="portfolio-info">
-        <p class="portfolio-type">Restaurante · Landing Page</p>
-        <h3 class="portfolio-name">
-          <span data-lang="es" class="active">Pizzería Local</span>
-          <span data-lang="en">Local Pizzeria</span>
-        </h3>
-        <p class="portfolio-desc">
-          <span data-lang="es" class="active">Sitio con menú visual, horarios, ubicación y botón de pedido directo por WhatsApp.</span>
-          <span data-lang="en">Site with visual menu, hours, location and direct order button via WhatsApp.</span>
-        </p>
-        <div class="portfolio-tags">
-          <span class="portfolio-tag">HTML/CSS</span>
-          <span class="portfolio-tag">WhatsApp API</span>
-          <span class="portfolio-tag">Responsive</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal">
-      <div class="portfolio-preview p-ropa">
-        <div class="portfolio-overlay"></div>
-        👗
-      </div>
-      <div class="portfolio-info">
-        <p class="portfolio-type">Moda · Tienda en Línea</p>
-        <h3 class="portfolio-name">
-          <span data-lang="es" class="active">Tienda de Ropa</span>
-          <span data-lang="en">Clothing Store</span>
-        </h3>
-        <p class="portfolio-desc">
-          <span data-lang="es" class="active">E-commerce con catálogo de productos, entrega a domicilio y checkout por WhatsApp.</span>
-          <span data-lang="en">E-commerce with product catalog, home delivery and WhatsApp checkout.</span>
-        </p>
-        <div class="portfolio-tags">
-          <span class="portfolio-tag">E-commerce</span>
-          <span class="portfolio-tag">Catálogo</span>
-          <span class="portfolio-tag">Mobile First</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal">
-      <div class="portfolio-preview p-bode">
-        <div class="portfolio-overlay"></div>
-        📦
-      </div>
-      <div class="portfolio-info">
-        <p class="portfolio-type">Mayoreo · Página Corporativa</p>
-        <h3 class="portfolio-name">
-          <span data-lang="es" class="active">Bodega Textil</span>
-          <span data-lang="en">Textile Warehouse</span>
-        </h3>
-        <p class="portfolio-desc">
-          <span data-lang="es" class="active">Sitio con catálogo por categorías, precios de mayoreo, redes sociales integradas y contacto directo.</span>
-          <span data-lang="en">Site with category catalog, wholesale prices, integrated social media and direct contact.</span>
-        </p>
-        <div class="portfolio-tags">
-          <span class="portfolio-tag">Mayoreo</span>
-          <span class="portfolio-tag">TikTok</span>
-          <span class="portfolio-tag">Multicategoría</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal">
-      <div class="portfolio-preview p-anim">
-        <div class="portfolio-overlay"></div>
-        🌸
-      </div>
-      <div class="portfolio-info">
-        <p class="portfolio-type">Moda Alternativa · Landing Page</p>
-        <h3 class="portfolio-name">
-          <span data-lang="es" class="active">Tienda Alternativa</span>
-          <span data-lang="en">Alternative Store</span>
-        </h3>
-        <p class="portfolio-desc">
-          <span data-lang="es" class="active">Diseño temático con estética anime, catálogo de ropa y entrega a domicilio por WhatsApp.</span>
-          <span data-lang="en">Themed design with anime aesthetic, clothing catalog and home delivery via WhatsApp.</span>
-        </p>
-        <div class="portfolio-tags">
-          <span class="portfolio-tag">Diseño temático</span>
-          <span class="portfolio-tag">Anime</span>
-          <span class="portfolio-tag">Custom CSS</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <p class="portfolio-note reveal">
-    <span data-lang="es" class="active">¿Quieres ver cómo quedaría <span>tu negocio</span>? Escríbeme y te hago una demo gratis.</span>
-    <span data-lang="en">Want to see what <span>your business</span> would look like? Message me and I'll make a free demo.</span>
-  </p>
-</section>
-
-<!-- PRICING -->
 <section id="pricing">
-  <p class="section-tag reveal" style="text-align:center">
-    <span data-lang="es" class="active">// Precios</span>
-    <span data-lang="en">// Pricing</span>
-  </p>
-  <h2 class="section-title reveal" style="text-align:center">
-    <span data-lang="es" class="active">Inversión <span style="color:var(--gold2)">clara</span></span>
-    <span data-lang="en"><span style="color:var(--gold2)">Clear</span> investment</span>
-  </h2>
-  <div class="divider reveal" style="margin:0 auto 0"></div>
+  <p class="section-tag">// Inversión</p>
+  <h2 class="section-title">Planes y <span style="color:var(--gold2)">Servicios</span></h2>
+  <div class="divider"></div>
 
-  <div class="pricing-grid reveal">
-
+  <div class="pricing-grid">
     <div class="price-card">
-      <div class="price-icon">📄</div>
-      <div class="price-name">
-        <span data-lang="es" class="active">Landing Page</span>
-        <span data-lang="en">Landing Page</span>
-      </div>
-      <p class="price-from">
-        <span data-lang="es" class="active">desde</span>
-        <span data-lang="en">starting at</span>
-      </p>
-      <div class="price-amount">$2,500</div>
-      <p class="price-period">MXN · pago único</p>
+      <p class="price-name">Essential Landing</p>
+      <div class="price-amount">$80</div>
       <ul class="price-features">
-        <li><span data-lang="es" class="active">1 página optimizada</span><span data-lang="en">1 optimized page</span></li>
-        <li><span data-lang="es" class="active">Botón de WhatsApp</span><span data-lang="en">WhatsApp button</span></li>
-        <li><span data-lang="es" class="active">Diseño responsive</span><span data-lang="en">Responsive design</span></li>
-        <li><span data-lang="es" class="active">Entrega en 3–5 días</span><span data-lang="en">Delivery in 3–5 days</span></li>
+        <li>1 Página (3 Secciones)</li>
+        <li>Diseño Responsive</li>
+        <li>Iconos Redes Sociales</li>
+        <li>2 Revisiones</li>
       </ul>
+      <a href="https://es.fiverr.com/s/VYl130Y" target="_blank" class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.7rem;">Elegir Plan</a>
     </div>
 
     <div class="price-card featured">
-      <div class="price-badge">
-        <span data-lang="es" class="active">Popular</span>
-        <span data-lang="en">Popular</span>
-      </div>
-      <div class="price-icon">🌐</div>
-      <div class="price-name">
-        <span data-lang="es" class="active">Página Web</span>
-        <span data-lang="en">Website</span>
-      </div>
-      <p class="price-from">
-        <span data-lang="es" class="active">desde</span>
-        <span data-lang="en">starting at</span>
-      </p>
-      <div class="price-amount">$4,500</div>
-      <p class="price-period">MXN · pago único</p>
+      <span class="price-badge">Fiverr Exclusive</span>
+      <p class="price-name">Business Growth</p>
+      <div class="price-amount">$150</div>
       <ul class="price-features">
-        <li><span data-lang="es" class="active">Múltiples secciones</span><span data-lang="en">Multiple sections</span></li>
-        <li><span data-lang="es" class="active">Formulario de contacto</span><span data-lang="en">Contact form</span></li>
-        <li><span data-lang="es" class="active">SEO básico incluido</span><span data-lang="en">Basic SEO included</span></li>
-        <li><span data-lang="es" class="active">Redes sociales</span><span data-lang="en">Social media links</span></li>
-        <li><span data-lang="es" class="active">1 revisión incluida</span><span data-lang="en">1 revision included</span></li>
+        <li>Hasta 5 Secciones</li>
+        <li>Optimización de Velocidad</li>
+        <li>SEO Básico</li>
+        <li>Soporte Prioritario</li>
       </ul>
+      <a href="https://es.fiverr.com/s/VYl130Y" target="_blank" class="btn-primary" style="background: var(--fiverr); padding: 0.6rem 1.5rem; font-size: 0.7rem;">Contratar Ahora</a>
     </div>
-
-    <div class="price-card">
-      <div class="price-icon">🛒</div>
-      <div class="price-name">
-        <span data-lang="es" class="active">Tienda en Línea</span>
-        <span data-lang="en">Online Store</span>
-      </div>
-      <p class="price-from">
-        <span data-lang="es" class="active">desde</span>
-        <span data-lang="en">starting at</span>
-      </p>
-      <div class="price-amount">$7,500</div>
-      <p class="price-period">MXN · pago único</p>
-      <ul class="price-features">
-        <li><span data-lang="es" class="active">Catálogo de productos</span><span data-lang="en">Product catalog</span></li>
-        <li><span data-lang="es" class="active">Pagos integrados</span><span data-lang="en">Integrated payments</span></li>
-        <li><span data-lang="es" class="active">Carrito de compras</span><span data-lang="en">Shopping cart</span></li>
-        <li><span data-lang="es" class="active">Panel de administración</span><span data-lang="en">Admin panel</span></li>
-        <li><span data-lang="es" class="active">Soporte post-entrega</span><span data-lang="en">Post-delivery support</span></li>
-      </ul>
-    </div>
-
-    <div class="price-card">
-      <div class="price-icon">🔧</div>
-      <div class="price-name">
-        <span data-lang="es" class="active">Mantenimiento</span>
-        <span data-lang="en">Maintenance</span>
-      </div>
-      <p class="price-from">
-        <span data-lang="es" class="active">desde</span>
-        <span data-lang="en">starting at</span>
-      </p>
-      <div class="price-amount">$1,500</div>
-      <p class="price-period">
-        <span data-lang="es" class="active">MXN · mensual</span>
-        <span data-lang="en">MXN · monthly</span>
-      </p>
-      <ul class="price-features">
-        <li><span data-lang="es" class="active">Actualizaciones continuas</span><span data-lang="en">Continuous updates</span></li>
-        <li><span data-lang="es" class="active">Corrección de errores</span><span data-lang="en">Bug fixes</span></li>
-        <li><span data-lang="es" class="active">Cambios de contenido</span><span data-lang="en">Content changes</span></li>
-        <li><span data-lang="es" class="active">Soporte prioritario</span><span data-lang="en">Priority support</span></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="pricing-cta reveal">
-    <a href="#contact" class="btn-primary">
-      <span data-lang="es" class="active">Cotización personalizada gratis</span>
-      <span data-lang="en">Free personalized quote</span>
-    </a>
-    <p class="pricing-note">
-      <span data-lang="es" class="active">◆ Anticipo del 50% para iniciar · Saldo al entregar · Mercado Pago / Transferencia</span>
-      <span data-lang="en">◆ 50% upfront to start · Balance on delivery · Mercado Pago / Transfer</span>
-    </p>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" style="text-align:center; position:relative; overflow:hidden;">
-  <div class="wa-glow"></div>
-  <div class="wa-glow2"></div>
+<div class="fiverr-ad">
+  <div style="background: var(--fiverr); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">fi</div>
+  <p>¿Buscas seguridad? Contrátame a través de <b>Fiverr</b>.</p>
+  <a href="https://es.fiverr.com/s/VYl130Y" target="_blank">Ver Perfil</a>
+</div>
 
-  <p class="section-tag reveal">
-    <span data-lang="es" class="active">// Contacto</span>
-    <span data-lang="en">// Contact</span>
-  </p>
-  <h2 class="section-title reveal" style="margin-bottom:1rem;">
-    <span data-lang="es" class="active">¿Listo para<br/><span style="color:var(--gold2)">empezar?</span></span>
-    <span data-lang="en">Ready to<br/><span style="color:var(--gold2)">get started?</span></span>
-  </h2>
-  <div class="divider reveal" style="margin:0 auto 1.5rem;"></div>
-
-  <p class="reveal" style="color:var(--text-muted);max-width:480px;margin:0 auto 3.5rem;line-height:1.8;font-size:1rem;font-weight:400;">
-    <span data-lang="es" class="active">Un solo mensaje es suficiente para arrancar. Sin formularios complicados, sin esperas — respuesta rápida garantizada.</span>
-    <span data-lang="en">One message is all it takes. No complicated forms, no waiting — fast response guaranteed.</span>
-  </p>
-
-  <a href="https://wa.me/526679612041" target="_blank" class="wa-mega-btn reveal">
-    <span class="wa-pulse"></span>
-    <svg class="wa-mega-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.551 4.099 1.512 5.831L.057 23.486a.5.5 0 0 0 .612.612l5.655-1.455A11.947 11.947 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.87 0-3.63-.49-5.156-1.345l-.37-.213-3.818.982.999-3.818-.213-.37A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-    </svg>
-    <span class="wa-mega-text">
-      <span class="wa-mega-label">
-        <span data-lang="es" class="active">Escríbeme ahora</span>
-        <span data-lang="en">Message me now</span>
-      </span>
-      <span class="wa-mega-sub">WhatsApp · +52 667 961 2041</span>
-    </span>
-    <span class="wa-arrow">→</span>
-  </a>
-
-  <div class="wa-badges reveal">
-    <span class="wa-badge">
-      <span data-lang="es" class="active">⚡ Respuesta en minutos</span>
-      <span data-lang="en">⚡ Reply in minutes</span>
-    </span>
-    <span class="wa-badge">
-      <span data-lang="es" class="active">🔒 50% anticipo · 50% al entregar</span>
-      <span data-lang="en">🔒 50% upfront · 50% on delivery</span>
-    </span>
-    <span class="wa-badge">
-      <span data-lang="es" class="active">🌎 ES / EN</span>
-      <span data-lang="en">🌎 ES / EN</span>
-    </span>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Corona<span style="color:var(--text-muted);font-weight:400">.dev</span></div>
-  <p class="footer-copy">
-    <span data-lang="es" class="active">© 2025 Corona Dev — Todos los derechos reservados</span>
-    <span data-lang="en">© 2025 Corona Dev — All rights reserved</span>
-  </p>
-</footer>
-
-<script>
-  let currentLang = 'es';
-
-  function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('[data-lang]').forEach(el => {
-      el.classList.toggle('active', el.dataset.lang === lang);
-    });
-    document.querySelectorAll('.nav-link').forEach(el => {
-      el.textContent = lang === 'es' ? el.dataset.es : el.dataset.en;
-    });
-    document.querySelectorAll('.stat-label[data-es]').forEach(el => {
-      el.textContent = lang === 'es' ? el.dataset.es : el.dataset.en;
-    });
-    document.getElementById('btnES').classList.toggle('active', lang === 'es');
-    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
-    document.documentElement.lang = lang;
-  }
-
-  window.addEventListener('scroll', () => {
-    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-    document.getElementById('scrollProgress').style.width = scrolled + '%';
-  });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  function showToast(msg) {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3500);
-  }
-</script>
 </body>
 </html>
