@@ -18,6 +18,7 @@
       --border: rgba(201,168,76,0.2);
       --white: #ffffff;
       --fiverr: #1dbf73;
+      --wa: #25D366;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,16 +28,6 @@
       color: var(--text);
       font-family: 'Syne', sans-serif;
       overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.4;
     }
 
     /* NAV */
@@ -53,322 +44,185 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      color: var(--gold2);
-    }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--gold2); text-decoration: none; }
     .logo span { color: var(--text); font-weight: 400; }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
       font-size: 0.85rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: color 0.3s;
     }
     .nav-links a:hover { color: var(--gold2); }
 
-    .lang-toggle {
-      display: flex;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 2rem;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .lang-btn {
-      padding: 0.3rem 0.85rem;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.3s;
-      font-family: 'Syne', sans-serif;
-    }
-    .lang-btn.active { background: var(--gold); color: #0a0a0a; }
+    /* SECTIONS GENERAL */
+    section { padding: 8rem 5%; border-bottom: 1px solid var(--border); }
+    .section-tag { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin-bottom: 2rem; }
+    .divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 3.5rem; }
 
     /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 5%;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-glow {
-      position: absolute; top: -20%; right: -10%;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-glow2 {
-      position: absolute; bottom: -20%; left: -10%;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.2s forwards;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 9vw, 8rem);
-      font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-      max-width: 800px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.4s forwards;
-    }
-    .hero h1 .gold { color: var(--gold2); }
-    .hero-sub {
-      margin-top: 2rem;
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 500px;
-      line-height: 1.7;
-      font-weight: 400;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.6s forwards;
-    }
-    .hero-cta {
-      margin-top: 3rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.8s forwards;
-    }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
+    .hero h1 { font-size: clamp(3.5rem, 9vw, 8rem); line-height: 0.95; margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; }
+    .gold { color: var(--gold2); }
+    .hero-sub { color: var(--text-muted); max-width: 550px; line-height: 1.7; margin-bottom: 3rem; }
+    
     .btn-primary {
-      padding: 0.9rem 2.5rem;
+      display: inline-block;
+      padding: 1rem 2.5rem;
       background: var(--gold);
       color: #0a0a0a;
-      border: none;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
       text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    }
-    .btn-primary:hover {
-      background: var(--gold2);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(201,168,76,0.3);
-    }
-
-    .crown-deco {
-      position: absolute; right: 5%; bottom: 15%;
-      font-size: 12rem; opacity: 0.04;
-      pointer-events: none;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    /* SECTIONS */
-    section { padding: 7rem 5%; }
-    .section-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--gold);
-      letter-spacing: 0.25em;
+      font-weight: 800;
       text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 2rem;
-    }
-    .divider {
-      width: 60px; height: 2px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      margin-bottom: 3rem;
+      letter-spacing: 1px;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
     }
 
     /* ABOUT */
-    #about {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-    .about-text p {
-      color: var(--text-muted);
-      line-height: 1.9;
-      font-size: 1rem;
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-    }
+    #about { background: var(--bg2); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .about-text p { line-height: 1.8; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    /* PORTFOLIO */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .project-card { background: var(--bg3); border: 1px solid var(--border); padding: 2rem; }
+    .project-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; }
 
     /* PRICING */
-    #pricing { background: var(--bg); border-top: 1px solid var(--border); }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .price-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      position: relative;
-      transition: all 0.4s;
-    }
-    .price-card.featured {
-      border-color: var(--gold);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      transform: translateY(-10px);
-      background: var(--bg3);
-    }
-    .price-badge {
-      display: inline-block;
-      background: var(--fiverr);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 800;
-      padding: 0.3rem 0.8rem;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
-    .price-amount {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: var(--gold2);
-      margin: 1rem 0;
-    }
-    .price-features { list-style: none; margin: 1.5rem 0; }
-    .price-features li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.6rem; }
-    .price-features li::before { content: '◆ '; color: var(--gold); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .price-card { background: var(--bg2); border: 1px solid var(--border); padding: 3rem 2rem; position: relative; }
+    .price-card.featured { border-color: var(--gold); transform: scale(1.05); z-index: 2; }
+    .price-badge { background: var(--fiverr); color: #fff; padding: 0.3rem 0.8rem; font-size: 0.7rem; position: absolute; top: 0; right: 0; }
 
-    /* AD BANNER */
-    .fiverr-ad {
-      position: fixed;
-      bottom: 2rem;
-      left: 2rem;
-      background: var(--bg3);
-      border: 1px solid var(--fiverr);
-      padding: 1rem;
-      z-index: 1000;
-      display: flex;
+    /* CONTACT / WHATSAPP */
+    #contact { text-align: center; background: var(--bg2); }
+    .wa-btn {
+      display: inline-flex;
       align-items: center;
       gap: 1rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      animation: slideIn 0.5s ease-out;
-    }
-    .fiverr-ad p { font-size: 0.75rem; color: var(--text); font-weight: 600; max-width: 150px; }
-    .fiverr-ad a {
-      background: var(--fiverr);
+      background: var(--wa);
       color: white;
+      padding: 1.5rem 3rem;
       text-decoration: none;
-      padding: 0.5rem 1rem;
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: transform 0.3s;
     }
+    .wa-btn:hover { transform: scale(1.05); }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+    /* FIVERR FLOATING AD */
+    .fiverr-float {
+      position: fixed; bottom: 2rem; left: 2rem;
+      background: var(--bg3); border: 1px solid var(--fiverr);
+      padding: 1rem; z-index: 1000; display: flex; align-items: center; gap: 1rem;
+    }
+    .fiverr-float a { background: var(--fiverr); color: white; text-decoration: none; padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 700; }
 
     @media (max-width: 768px) {
       .about-grid { grid-template-columns: 1fr; }
-      .fiverr-ad { bottom: 1rem; left: 1rem; right: 1rem; }
+      .nav-links { display: none; }
+      .fiverr-float { bottom: 1rem; left: 1rem; right: 1rem; justify-content: space-between; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">Corona<span>.dev</span></div>
+  <a href="#" class="logo">Corona<span>.dev</span></a>
   <ul class="nav-links">
     <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#portfolio">Portafolio</a></li>
     <li><a href="#pricing">Precios</a></li>
     <li><a href="#contact">Contacto</a></li>
   </ul>
 </nav>
 
 <section class="hero" id="home">
-  <div class="hero-glow"></div>
-  <div class="crown-deco">👑</div>
-  <p class="hero-tag">Desarrollo & Diseño Digital</p>
+  <p class="section-tag">Desarrollo & Diseño Digital</p>
   <h1>Tu visión,<br/><span class="gold">código real.</span></h1>
-  <p class="hero-sub">Soluciones digitales a medida. Especialista en Landing Pages de alta conversión.</p>
+  <p class="hero-sub">Diseño de interfaces modernas y funcionales. Especialista en Landing Pages que impulsan tu negocio.</p>
   <div class="hero-cta">
-    <a href="https://es.fiverr.com/s/VYl130Y" target="_blank" class="btn-primary">Contratar en Fiverr</a>
+    <a href="#pricing" class="btn-primary">Ver Planes</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="section-tag">// Mi Enfoque</p>
+      <h2 class="section-title">Detrás del <span class="gold">Código</span></h2>
+      <div class="divider"></div>
+      <p>Soy <b>Jesus Corona</b>, un desarrollador enfocado en crear soluciones digitales que no solo se ven bien, sino que funcionan perfectamente. Ayudo a emprendedores a digitalizar sus ideas con rapidez y profesionalismo.</p>
+      <p>Cada línea de código está optimizada para que tu sitio sea rápido, seguro y adaptable a cualquier dispositivo.</p>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center; font-size: 10rem; opacity: 0.1;">💻</div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <p class="section-tag">// Trabajo Reciente</p>
+  <h2 class="section-title">Portafolio</h2>
+  <div class="divider"></div>
+  <div class="portfolio-grid">
+    <div class="project-card">
+      <h3>Obsidian Coffee</h3>
+      <p style="color:var(--text-muted); font-size:0.9rem;">Landing page premium para cafetería gourmet. Enfoque en elegancia y conversión.</p>
+    </div>
+    <div class="project-card">
+      <h3>E-commerce Modas</h3>
+      <p style="color:var(--text-muted); font-size:0.9rem;">Catálogo digital con integración de pedidos directos a WhatsApp.</p>
+    </div>
   </div>
 </section>
 
 <section id="pricing">
   <p class="section-tag">// Inversión</p>
-  <h2 class="section-title">Planes y <span style="color:var(--gold2)">Servicios</span></h2>
+  <h2 class="section-title">Planes</h2>
   <div class="divider"></div>
-
   <div class="pricing-grid">
     <div class="price-card">
-      <p class="price-name">Essential Landing</p>
-      <div class="price-amount">$80</div>
-      <ul class="price-features">
-        <li>1 Página (3 Secciones)</li>
-        <li>Diseño Responsive</li>
-        <li>Iconos Redes Sociales</li>
-        <li>2 Revisiones</li>
+      <h3>Basic Landing</h3>
+      <div style="font-size: 2.5rem; margin: 1.5rem 0;" class="gold">$80 USD</div>
+      <ul style="list-style:none; color:var(--text-muted); margin-bottom: 2rem; line-height: 2;">
+        <li>✔ 3 Secciones</li>
+        <li>✔ Diseño Responsive</li>
+        <li>✔ Botón WhatsApp</li>
       </ul>
-      <a href="https://es.fiverr.com/s/VYl130Y" target="_blank" class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.7rem;">Elegir Plan</a>
+      <a href="https://es.fiverr.com/s/VYl130Y" target="_blank" class="btn-primary" style="font-size: 0.7rem;">Contratar en Fiverr</a>
     </div>
-
     <div class="price-card featured">
-      <span class="price-badge">Fiverr Exclusive</span>
-      <p class="price-name">Business Growth</p>
-      <div class="price-amount">$150</div>
-      <ul class="price-features">
-        <li>Hasta 5 Secciones</li>
-        <li>Optimización de Velocidad</li>
-        <li>SEO Básico</li>
-        <li>Soporte Prioritario</li>
+      <div class="price-badge">RECOMENDADO</div>
+      <h3>Business Plus</h3>
+      <div style="font-size: 2.5rem; margin: 1.5rem 0;" class="gold">$150 USD</div>
+      <ul style="list-style:none; color:var(--text-muted); margin-bottom: 2rem; line-height: 2;">
+        <li>✔ 5 Secciones</li>
+        <li>✔ SEO Básico</li>
+        <li>✔ Optimización de Carga</li>
       </ul>
-      <a href="https://es.fiverr.com/s/VYl130Y" target="_blank" class="btn-primary" style="background: var(--fiverr); padding: 0.6rem 1.5rem; font-size: 0.7rem;">Contratar Ahora</a>
+      <a href="https://es.fiverr.com/s/VYl130Y" target="_blank" class="btn-primary" style="background:var(--fiverr); color:white; font-size: 0.7rem;">Contratar en Fiverr</a>
     </div>
   </div>
 </section>
 
-<div class="fiverr-ad">
-  <div style="background: var(--fiverr); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">fi</div>
-  <p>¿Buscas seguridad? Contrátame a través de <b>Fiverr</b>.</p>
-  <a href="https://es.fiverr.com/s/VYl130Y" target="_blank">Ver Perfil</a>
+<section id="contact">
+  <p class="section-tag">// Directo</p>
+  <h2 class="section-title">¿Hablamos por <span style="color:var(--wa)">WhatsApp?</span></h2>
+  <div class="divider" style="margin: 0 auto 3rem;"></div>
+  <p style="margin-bottom: 3rem; color:var(--text-muted);">Si tienes dudas rápidas o prefieres una cotización personalizada fuera de plataforma, escríbeme directamente.</p>
+  <a href="https://wa.me/tu_numero_aqui" class="wa-btn">
+    Enviar Mensaje
+  </a>
+</section>
+
+<div class="fiverr-float">
+  <div style="background:var(--fiverr); color:white; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900;">fi</div>
+  <p style="font-size: 0.8rem; font-weight: 600;">Pagos seguros por Fiverr</p>
+  <a href="https://es.fiverr.com/s/VYl130Y" target="_blank">Ver Gig</a>
 </div>
 
 </body>
